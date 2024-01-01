@@ -1,16 +1,18 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-// ignore_for_file: must_be_immutable
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:praktikum_modul_12/firebase_services.dart';
 import 'package:praktikum_modul_12/form_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +22,7 @@ class HomePage extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => FormPage()),
+            MaterialPageRoute(builder: (context) => const FormPage()),
           );
         },
       ),
@@ -39,7 +41,7 @@ class HomePage extends StatelessWidget {
                 return ListView.separated(
                   separatorBuilder: (context, index) {
                     return const SizedBox(
-                      height: 6.0,
+                      height: 8.0,
                     );
                   },
                   padding: const EdgeInsets.all(12.0),
@@ -66,6 +68,7 @@ class HomePage extends StatelessWidget {
                           onPressed: () async {
                             await FirebaseServices()
                                 .deleteTugas(docId: tugas["id"]);
+                            setState(() {});
                           },
                           icon: const Icon(
                             Icons.delete,

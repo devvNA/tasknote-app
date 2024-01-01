@@ -1,23 +1,29 @@
 // ignore_for_file: must_be_immutable, unnecessary_null_comparison
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:praktikum_modul_12/firebase_services.dart';
 
 class FormPage extends StatefulWidget {
-  FormPage({this.tugas, super.key});
+  const FormPage({this.tugas, super.key});
 
-  Map? tugas;
+  final Map? tugas;
 
   @override
   State<FormPage> createState() => _FormPageState();
 }
 
 class _FormPageState extends State<FormPage> {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
   String? judul;
   String? deskripsi;
   bool get isEditMode => widget.tugas != null;
+
+  @override
+  void initState() {
+    if (isEditMode) {
+      judul = widget.tugas!["judul"];
+      deskripsi = widget.tugas!["deskripsi"];
+    }
+    super.initState();
+  }
 
   onSave() async {
     if (isEditMode) {
@@ -32,15 +38,6 @@ class _FormPageState extends State<FormPage> {
         deskripsi: deskripsi ?? "",
       );
     }
-  }
-
-  @override
-  void initState() {
-    if (isEditMode) {
-      judul = widget.tugas!["judul"];
-      deskripsi = widget.tugas!["deskripsi"];
-    }
-    super.initState();
   }
 
   @override
