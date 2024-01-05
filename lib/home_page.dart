@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:praktikum_modul_12/firebase_services.dart';
 import 'package:praktikum_modul_12/form_page.dart';
+import 'package:praktikum_modul_12/login_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -13,6 +16,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  onLogout() async {
+    await FirebaseServices().logout();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +39,17 @@ class _HomePageState extends State<HomePage> {
       ),
       appBar: AppBar(
         title: const Text("Tugas App"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              onLogout();
+            },
+            icon: const Icon(
+              Icons.logout,
+              size: 25.0,
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
