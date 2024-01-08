@@ -104,6 +104,9 @@ class RegistrationPage extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 15.0,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

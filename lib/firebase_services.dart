@@ -12,11 +12,7 @@ class FirebaseServices {
           .createUserWithEmailAndPassword(email: email, password: password);
       return true;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        log('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        log('The account already exists for that email.');
-      }
+      log(e.toString());
       return false;
     }
   }
@@ -28,11 +24,7 @@ class FirebaseServices {
           .signInWithEmailAndPassword(email: email, password: password);
       return true;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        log('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        log('Wrong password provided for that user.');
-      }
+      log(e.toString());
       return false;
     }
   }
