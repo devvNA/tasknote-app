@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+Manage task using FirebaseFirestore🔥
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
