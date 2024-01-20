@@ -7,14 +7,20 @@ import 'package:praktikum_modul_12/firebase_services.dart';
 import 'package:praktikum_modul_12/home_page.dart';
 import 'package:praktikum_modul_12/registration_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    String? email;
-    String? password;
+  State<LoginPage> createState() => _LoginPageState();
+}
 
+class _LoginPageState extends State<LoginPage> {
+  bool isVisible = false;
+  String? email;
+  String? password;
+
+  @override
+  Widget build(BuildContext context) {
     onLogin() async {
       bool isSuccess = await FirebaseServices()
           .login(email: email ?? "", password: password ?? "");
@@ -35,6 +41,10 @@ class LoginPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const FlutterLogo(size: 150),
+          const SizedBox(
+            height: 50.0,
+          ),
           Container(
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -61,7 +71,7 @@ class LoginPage extends StatelessWidget {
                   height: 15.0,
                 ),
                 TextFormField(
-                  obscureText: true,
+                  obscureText: isVisible,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -70,8 +80,16 @@ class LoginPage extends StatelessWidget {
                     labelStyle: const TextStyle(
                       color: Colors.blueGrey,
                     ),
-                    suffixIcon: const Icon(
-                      Icons.password,
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        isVisible = !isVisible;
+                        setState(() {});
+                      },
+                      icon: isVisible
+                          ? const Icon(
+                              Icons.visibility_off,
+                            )
+                          : const Icon(Icons.visibility),
                     ),
                     helperText: 'Enter your password',
                   ),
@@ -104,9 +122,6 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-                const SizedBox(
-                  height: 15.0,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

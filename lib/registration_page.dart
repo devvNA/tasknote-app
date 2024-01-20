@@ -6,14 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:praktikum_modul_12/firebase_services.dart';
 import 'package:praktikum_modul_12/login_page.dart';
 
-class RegistrationPage extends StatelessWidget {
+class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    String? email;
-    String? password;
+  State<RegistrationPage> createState() => _RegistrationPageState();
+}
 
+class _RegistrationPageState extends State<RegistrationPage> {
+  bool isVisible = false;
+  String? email;
+  String? password;
+
+  @override
+  Widget build(BuildContext context) {
     onRegistration() async {
       bool isSuccess = await FirebaseServices()
           .registration(email: email ?? "", password: password ?? "");
@@ -34,6 +40,10 @@ class RegistrationPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const FlutterLogo(size: 150),
+          const SizedBox(
+            height: 50.0,
+          ),
           Container(
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -60,7 +70,7 @@ class RegistrationPage extends StatelessWidget {
                   height: 15.0,
                 ),
                 TextFormField(
-                  obscureText: true,
+                  obscureText: isVisible,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -69,8 +79,16 @@ class RegistrationPage extends StatelessWidget {
                     labelStyle: const TextStyle(
                       color: Colors.blueGrey,
                     ),
-                    suffixIcon: const Icon(
-                      Icons.password,
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        isVisible = !isVisible;
+                        setState(() {});
+                      },
+                      icon: isVisible
+                          ? const Icon(
+                              Icons.visibility_off,
+                            )
+                          : const Icon(Icons.visibility),
                     ),
                     helperText: 'Enter your password',
                   ),
@@ -103,9 +121,6 @@ class RegistrationPage extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-                const SizedBox(
-                  height: 15.0,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
