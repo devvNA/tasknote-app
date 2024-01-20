@@ -19,20 +19,20 @@ class _LoginPageState extends State<LoginPage> {
   String? email;
   String? password;
 
+  onLogin() async {
+    bool isSuccess = await FirebaseServices()
+        .login(email: email ?? "", password: password ?? "");
+    if (!isSuccess) {
+      return log("error login");
+    }
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const HomePage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    onLogin() async {
-      bool isSuccess = await FirebaseServices()
-          .login(email: email ?? "", password: password ?? "");
-      if (!isSuccess) {
-        return log("error login");
-      }
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Login"),

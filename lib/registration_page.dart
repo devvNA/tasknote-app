@@ -18,20 +18,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
   String? email;
   String? password;
 
+  onRegistration() async {
+    bool isSuccess = await FirebaseServices()
+        .registration(email: email ?? "", password: password ?? "");
+    if (!isSuccess) {
+      return log("error registration");
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    onRegistration() async {
-      bool isSuccess = await FirebaseServices()
-          .registration(email: email ?? "", password: password ?? "");
-      if (!isSuccess) {
-        return log("error registration");
-      }
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginPage()),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Registration"),
