@@ -2,7 +2,7 @@
   "[dart]": {
       "editor.formatOnSave": true,
       "editor.codeActionsOnSave": {
-        "source.fixAll": "explicit"
+          "source.fixAll": true
       },
       "editor.formatOnType": true,
       "editor.rulers": [

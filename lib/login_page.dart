@@ -15,7 +15,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool isVisible = false;
+  bool obscureText = true;
   String? email;
   String? password;
 
@@ -71,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 15.0,
                 ),
                 TextFormField(
-                  obscureText: isVisible,
+                  obscureText: obscureText,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -82,10 +82,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     suffixIcon: IconButton(
                       onPressed: () {
-                        isVisible = !isVisible;
+                        obscureText = !obscureText;
                         setState(() {});
                       },
-                      icon: isVisible
+                      icon: obscureText
                           ? const Icon(
                               Icons.visibility_off,
                             )
