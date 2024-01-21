@@ -42,13 +42,15 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text("Tugas App"),
         actions: [
-          IconButton(
-            onPressed: () {
-              onLogout();
-            },
-            icon: const Icon(
-              Icons.logout,
-              size: 25.0,
+          Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: IconButton(
+              onPressed: () {
+                onLogout();
+              },
+              icon: const Icon(
+                Icons.logout,
+              ),
             ),
           ),
         ],
@@ -154,6 +156,7 @@ class _HomePageState extends State<HomePage> {
                           },
                           icon: const Icon(
                             Icons.delete_forever,
+                            color: Colors.red,
                           ),
                         ),
                       ),

@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                           onLogin();
                         },
                         child: const Text(
-                          "Login",
+                          "Masuk",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.normal,
@@ -122,6 +122,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ],
+                ),
+                const SizedBox(
+                  height: 5.0,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
